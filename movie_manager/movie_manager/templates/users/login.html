@@ -1,0 +1,13 @@
+<h1>login</h1>
+<form method="post" enctype="multipart/form-data">
+   {% csrf_token %}
+   <p><label>Username :</label><input type="text" name="username"/></p>
+   <p><label>Password :</label><input type="Password" name="Password"/></p>
+<button type="submit">login</button>
+</form>
+
+<p style="background-color:red;">
+  {% if error_message %}
+  {{ error_message }}
+  {% endif %}
+</p>

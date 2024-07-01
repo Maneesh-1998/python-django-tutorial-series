@@ -1,0 +1,21 @@
+{% extends 'blank_layout.html' %}
+{% block content %}
+<h1>create user</h1>
+<form method="post" enctype="multipart/form-data">
+   {% csrf_token %}
+   <p><label>Username :</label><input type="text" name="username"/></p>
+   <p><label>Password :</label><input type="Password" name="Password"/></p>
+<button type="submit">signup</button>
+</form>
+<p>
+  {% if user %}
+  New user created with username{{user.Username}}
+  {% endif%}
+</p>
+
+<p style="background-color:red;">
+  {% if er %}
+  New user created with username{{user.Username}}
+  {% endif%}
+</p>
+{% endblock content %}
