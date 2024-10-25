@@ -1,0 +1,5 @@
+{% for obj in movie %}
+    <h1>Title:{{obj.title}}</h1>
+    <h3>Year:{{obj.year}}</h3>
+    <p>Summary:{{obj.summary | default:"summary not given"}}</p>
+{% endfor %}
