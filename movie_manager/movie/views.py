@@ -1,7 +1,6 @@
 from django.shortcuts import render
-from . models import movieinfo
-# Create your views here.
-from . form  import MovieForm
+from .models import *
+from . form  import *
 from django.contrib.auth.decorators import login_required
 def create(request):
     if request.POST:
@@ -18,18 +17,18 @@ def list(request):
     count=int(count)
     count=count+1
     request.session['count']=count
-    recent_movie_set=movieinfo.objects.filter(pk__in=recent_visits)
-    movie_set=movieinfo.objects.all()
+    recent_movie_set=MovieInfo.objects.filter(pk__in=recent_visits)
+    movie_set=MovieInfo.objects.all()
     print(movie_set)
     response=render(request,'list.html',{'recent_movies':recent_movie_set,'movie':movie_set,'visits':count})
     return response
 
 def edit(request,pk):
-    instance_to_be_edited=movieinfo.objects.get(pk=pk)
+    instance_to_be_edited=MovieInfo.objects.get(pk=pk)
     if request.POST:
-       frm=MovieForm(request.POST,instance=instance_to_be_edited)
-       if frm.is_valid():
-           instance_to_be_edited.save()
+        frm=MovieForm(request.POST,instance=instance_to_be_edited)
+        if frm.is_valid():
+            instance_to_be_edited.save()
     else:
         recent_visits=request.session.get('recent_visits',[])
         recent_visits.insert(0,pk)
@@ -38,7 +37,7 @@ def edit(request,pk):
     return render(request,'edit.html',{'frm':frm})
 @login_required(login_url='login/')
 def delete(request,pk):
-    instance=movieinfo.objects.get(pk=pk)
+    instance=MovieInfo.objects.get(pk=pk)
     instance.delete()
-    movie_set=movieinfo.objects.all()
+    movie_set=MovieInfo.objects.all()
     return render(request,'list.html',{'movie':movie_set})

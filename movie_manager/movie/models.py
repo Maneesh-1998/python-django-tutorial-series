@@ -17,7 +17,7 @@ class Actor(models.Model):
         return self.name
 
 # Create your models here.
-class movieinfo(models.Model):
+class MovieInfo(models.Model):
     title=models.CharField(max_length=250)
     year=models.IntegerField(null=True)
     description=models.TextField()

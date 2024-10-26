@@ -3,7 +3,7 @@
 <h1>create</h1>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-  {{ frm.as_p }}
+    {{ frm.as_p }}
     <button type="submit">submit</button>
 </form>
 {% endblock content %}
